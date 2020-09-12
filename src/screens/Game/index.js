@@ -12,7 +12,7 @@ export default function Game(){
           <div className={styles.card}>
             <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />
             <h2 className={styles.titleQuiz}>Which country does this flag belong to?</h2>
-            <div className={styles.containerOptions}>
+            <div className={styles.containerOptions}>=
                <button className={styles.button} type="button"> 
                 A  <span className={styles.optionText}> Vietam </span>
               </button>
@@ -22,7 +22,7 @@ export default function Game(){
               <button className={styles.buttonSuccess} type="button"> 
                 C <span className={styles.optionText}>vietam</span>
               </button>
-              <button className={styles.buttonFail} type="button"> 
+              <button className={styles.buttonFailype} type="button"> 
                 D <span className={styles.optionText}>vietam</span>
               </button>
             </div>

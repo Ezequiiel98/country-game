@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   padding-left: 32px;
-  padding-bottom: 35px;
+  padding-bottom: 20px;
   color: #2F527B;
 }
 
@@ -80,7 +80,7 @@
   transition: all .5s ease;
 
   & + * {
-    margin-top: 12px;  
+    margin-top: 15px;  
   }
 
   &:hover {
