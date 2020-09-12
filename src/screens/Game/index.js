@@ -1,9 +1,12 @@
 import React from 'react';
+import Button from 'components/Button';
+
 import imageWorld from '../../assets/undraw_adventure_4hum 1.svg';
+
 import styles from './index.module.scss';
 
-export default function Game(){
-  return(
+export default function Game() {
+  return (
     <div className={styles.game}>
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
@@ -12,26 +15,25 @@ export default function Game(){
           <div className={styles.card}>
             <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />
             <h2 className={styles.titleQuiz}>Which country does this flag belong to?</h2>
-            <div className={styles.containerOptions}>=
-               <button className={styles.button} type="button"> 
-                A  <span className={styles.optionText}> Vietam </span>
-              </button>
-               <button className={styles.button} type="button">
-                 B  <span  className={styles.optionText} > vietam</span> 
-              </button>
-              <button className={styles.buttonSuccess} type="button"> 
+            <div className={styles.containerOptions}>
+              <Button primary>
+                A <span className={styles.optionText}> Vietam </span>
+              </Button>
+              <Button primary>
+                B <span className={styles.optionText}> vietam</span>
+              </Button>
+              <Button fail>
                 C <span className={styles.optionText}>vietam</span>
-              </button>
-              <button className={styles.buttonFailype} type="button"> 
+              </Button>
+              <Button success>
                 D <span className={styles.optionText}>vietam</span>
-              </button>
+              </Button>
+              <Button secondary>Next</Button>
             </div>
           </div>
-          <button className={styles.buttonNext}>Next</button>
         </div>
       </div>
       <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>
     </div>
-  )
+  );
 }
-

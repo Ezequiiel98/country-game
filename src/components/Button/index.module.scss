@@ -1,0 +1,77 @@
+.btnPrimary {
+  min-width: 100%;
+  border: 1px solid #2f527b;
+  color: #2f527b;
+  outline: none;
+  padding: 12px 15px;
+  border-radius: 12px;
+  background-color: #fff;
+  text-align: left;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: capitalize;
+  transition: all .5s ease;
+/**
+  & + * {
+    margin-top: 15px;  
+  }
+**/ 
+  &:hover {
+    cursor: pointer;
+    background-color: #F9A826;
+    border-color: transparent;
+    color: #fff;
+  }
+}
+
+.btnAnswer{
+  @extend .btnPrimary;
+  position: relative;
+  color: #fff;
+  border-color: transparent;
+  
+  &::after{
+    position: absolute;
+    right: 20px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+}
+
+.btnFail {
+  @extend .btnAnswer;
+  background-color: #EA8282;
+  
+  &::after {
+    content: url('../../assets/fail.svg/');
+    top: 24%;
+    transform: rotate(45deg);
+  }
+}
+
+.btnSuccess {
+  @extend .btnAnswer;
+  background-color: #60BF88;
+  
+  &::after {
+    right: 6px;
+    top: 58%;
+    content: url('../../assets/success.svg');
+  }
+}
+
+
+.btnSecondary{
+  @extend .btnPrimary;
+  text-align: center;
+  background-color: #F9A826;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  padding: 16px 20px;
+
+  &:hover {
+    background-color: #F9A801; 
+  }
+}
