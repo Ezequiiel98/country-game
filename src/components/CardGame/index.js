@@ -5,7 +5,9 @@ import Button from '../Button';
 
 import styles from './index.module.scss';
 
-export default function CardGame() {
+const LETTERS_OPTIONS = ['A', 'B', 'C', 'D'];
+
+export default function CardGame({ options }) {
   return (
     <>
       <img className={styles.imgWorld} src={imageWorld} alt="picture man with the world" />
@@ -13,18 +15,11 @@ export default function CardGame() {
         <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />
         <h2 className={styles.titleQuiz}>Which country does this flag belong to?</h2>
         <div className={styles.containerOptions}>
-          <Button>
-            A <span className={styles.optionText}> Vietam </span>
-          </Button>
-          <Button>
-            B <span className={styles.optionText}> vietam</span>
-          </Button>
-          <Button fail>
-            C <span className={styles.optionText}>vietam</span>
-          </Button>
-          <Button success>
-            D <span className={styles.optionText}>vietam</span>
-          </Button>
+          {options.map((option, i) => (
+            <Button>
+              {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
+            </Button>
+          ))}
           <Button secondary>Next</Button>
         </div>
       </div>
