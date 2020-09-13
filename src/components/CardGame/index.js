@@ -44,11 +44,12 @@ export default function CardGame({ options, country, setNextQuestion }) {
               onClick={handleClick}
               fail={showAnswers && option !== country.name && optionChoose === LETTERS_OPTIONS[i]}
               success={showAnswers && option === country.name}
+              disabled={showAnswers}
             >
               {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
             </Button>
           ))}
-          <Button secondary onClick={handleNext}>
+          <Button secondary onClick={handleNext} disabled={!showAnswers}>
             Next
           </Button>
         </div>

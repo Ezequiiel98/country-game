@@ -33,6 +33,11 @@
     min-width: 30%;
     display: block;
     margin: 12px 0 auto auto;
+
+    &:disabled:hover {
+      cursor: not-allowed;
+      background-color: #F9A826;
+    }
   }
 }
 

@@ -10,20 +10,34 @@
   font-weight: 500;
   font-size: 20px;
   text-transform: capitalize;
+ 
   transition: all .5s ease;
   
-  &:hover {
+  &:hover { 
     cursor: pointer;
     background-color: #F9A826;
     border-color: transparent;
     color: #fff;
   }
+  
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &:hover:disabled{
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #2f527b;
+    color: #2f527b;
+  }
+ 
 }
 
 .btnAnswer{
   @extend .btnPrimary;
   position: relative;
   color: #fff;
+  transition: all 0.1s ease;
   
   &::after{
     position: absolute;
@@ -31,11 +45,15 @@
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
   }
+  
+
+  &:disabled {
+   opacity: 1;
+  }
 }
 
 .btnFail {
   @extend .btnAnswer;
-  transition: none;
   background-color: #EA8282;
   border-color: #EA8282;
   
@@ -44,6 +62,14 @@
     top: 24%;
     transform: rotate(45deg);
   }
+ 
+
+  &:hover:disabled{
+    background-color: #EA8282;
+    color: #fff;
+    border-color: #EA8282;
+  }
+
 }
 
 .btnSuccess {
@@ -55,6 +81,12 @@
     right: 6px;
     top: 58%;
     content: url('../../assets/success.svg');
+  }
+  
+  &:hover:disabled{
+    background-color: #60BF88;
+    border-color: #60BF88;
+    color: #fff;
   }
 }
 
