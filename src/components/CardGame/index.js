@@ -6,8 +6,9 @@ import Button from '../Button';
 import styles from './index.module.scss';
 
 const LETTERS_OPTIONS = ['A', 'B', 'C', 'D'];
+const QUESTIONS = {};
 
-export default function CardGame({ options, country }) {
+export default function CardGame({ options, country, setNextQuestion }) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [optionChoose, setOptionChoose] = useState(null);
 
@@ -22,11 +23,18 @@ export default function CardGame({ options, country }) {
     setShowAnswers(true);
   };
 
+  const handleNext = () => {
+    if (showAnswers) {
+      setShowAnswers(false);
+      setOptionChoose(null);
+      setNextQuestion(true);
+    }
+  };
   return (
     <>
       <img className={styles.imgWorld} src={imageWorld} alt="picture man with the world" />
       <div className={styles.card}>
-        <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />
+        {/* <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />*/}
         <h2 className={styles.titleQuiz}>{country?.capital} is the capital of</h2>
         <div className={styles.containerOptions}>
           {options.map((option, i) => (
@@ -40,7 +48,9 @@ export default function CardGame({ options, country }) {
               {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
             </Button>
           ))}
-          <Button secondary>Next</Button>
+          <Button secondary onClick={handleNext}>
+            Next
+          </Button>
         </div>
       </div>
     </>
