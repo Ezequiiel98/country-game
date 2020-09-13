@@ -10,6 +10,7 @@ export default function Game() {
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
+          <CardFinishGame />
         </div>
       </div>
       <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>
