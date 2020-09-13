@@ -35,6 +35,7 @@
 
 .btnFail {
   @extend .btnAnswer;
+  transition: none;
   background-color: #EA8282;
   border-color: #EA8282;
   

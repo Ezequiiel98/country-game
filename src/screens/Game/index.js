@@ -68,20 +68,20 @@ export default function Game() {
     if (loaded) {
       getcountryRandom();
     }
-  }, [loaded, countries, getcountryRandom]);
+  }, [loaded, getcountryRandom]);
 
   useEffect(() => {
     if (loaded && countryRandom) {
       getOptions();
     }
-  }, [loaded, countryRandom, countries, getOptions]);
+  }, [loaded, countryRandom, getOptions]);
 
   return (
     <div className={styles.game}>
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
-          <CardGame options={options} country={countryRandom} />
+          {loaded ? <CardGame options={options} country={countryRandom} /> : <p>Loading...</p>}
         </div>
       </div>
       <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>

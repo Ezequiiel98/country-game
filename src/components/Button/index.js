@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-export default function Button({ children, secondary, fail, success, onClick }) {
+
+export default function Button({ children, secondary, fail, success, onClick, ...props }) {
   let stylesButton = 'btnPrimary';
 
   stylesButton = secondary ? 'btnSecondary' : stylesButton;
@@ -11,7 +12,7 @@ export default function Button({ children, secondary, fail, success, onClick }) 
   stylesButton = success ? 'btnSuccess' : stylesButton;
 
   return (
-    <button className={styles[stylesButton]} type="button" onClick={onClick}>
+    <button className={styles[stylesButton]} type="button" onClick={onClick} {...props}>
       {children}
     </button>
   );
