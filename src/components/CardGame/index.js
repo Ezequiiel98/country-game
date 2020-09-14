@@ -23,10 +23,11 @@ const QUESTIONS = {
 export default function CardGame({ options, country, setNextQuestion, question }) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [optionChoose, setOptionChoose] = useState(null);
-  console.log(question);
+
   const handleClick = (e) => {
     e.preventDefault();
     const { option } = e.target.dataset;
+
     if (showAnswers) {
       return null;
     }
