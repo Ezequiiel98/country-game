@@ -6,7 +6,11 @@ import Button from '../Button';
 import styles from './index.module.scss';
 
 const LETTERS_OPTIONS = ['A', 'B', 'C', 'D'];
-const QUESTIONS = {};
+const QUESTIONS = {
+  flag: 'Which country does this flag belong to?',
+  capital: 'is the capital of',
+  country: 'The  capital of'
+};
 
 export default function CardGame({ options, country, setNextQuestion }) {
   const [showAnswers, setShowAnswers] = useState(false);

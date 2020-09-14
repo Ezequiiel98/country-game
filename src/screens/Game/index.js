@@ -5,13 +5,17 @@ import fetchCountries from 'services/fetchCountries.js';
 
 import styles from './index.module.scss';
 
-const shuffleArray = (list = []) => {
-  for (let i = 0; i < list.length; i++) {
-    const indexRandom = Math.floor(Math.random() * (list.length - 1)) + 1;
-    const itemTemp = list[i];
+const shuffleArray = (array = [], shuffleTimes = 1) => {
+  const list = [...array];
 
-    list[i] = list[indexRandom];
-    list[indexRandom] = itemTemp;
+  for (let i = 0; i < shuffleTimes; i++) {
+    for (let j = 0; j < list.length; j++) {
+      const indexRandom = Math.floor(Math.random() * (list.length - 1)) + 1;
+      const itemTemp = list[j];
+
+      list[j] = list[indexRandom];
+      list[indexRandom] = itemTemp;
+    }
   }
 
   return list;
@@ -66,7 +70,7 @@ export default function Game() {
       }
     }
 
-    optionsShuffled = shuffleArray(optionsAnswers);
+    optionsShuffled = shuffleArray(optionsAnswers, Math.floor(Math.random() * 5) + 1);
     setOptions(optionsShuffled);
   }, [countryRandom, setOptions, countries]);
 
