@@ -7,15 +7,23 @@ import styles from './index.module.scss';
 
 const LETTERS_OPTIONS = ['A', 'B', 'C', 'D'];
 const QUESTIONS = {
-  flag: 'Which country does this flag belong to?',
-  capital: 'is the capital of',
-  country: 'The  capital of'
+  flag: {
+    getQuestion: () => 'Which country does this flag belong to?'
+  },
+
+  name: {
+    getQuestion: ({ capital }) => `${capital} is the capital of`
+  },
+
+  capital: {
+    getQuestion: ({ name }) => `The capital of ${name}`
+  }
 };
 
-export default function CardGame({ options, country, setNextQuestion }) {
+export default function CardGame({ options, country, setNextQuestion, question }) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [optionChoose, setOptionChoose] = useState(null);
-
+  console.log(question);
   const handleClick = (e) => {
     e.preventDefault();
     const { option } = e.target.dataset;
@@ -34,20 +42,30 @@ export default function CardGame({ options, country, setNextQuestion }) {
       setNextQuestion(true);
     }
   };
+
   return (
     <>
       <img className={styles.imgWorld} src={imageWorld} alt="picture man with the world" />
       <div className={styles.card}>
-        {/* <img className={styles.flagCountry} src="https://restcountries.eu/data/ala.svg" alt="" />*/}
-        <h2 className={styles.titleQuiz}>{country?.capital} is the capital of</h2>
+
+        {question === 'flag' && <img className={styles.flagCountry} src={country?.flag} alt="Country Flag" />}
+
+        <h2 className={styles.titleQuiz}>
+          {QUESTIONS[question].getQuestion(country)}{' '}
+        </h2>
+
         <div className={styles.containerOptions}>
           {options.map((option, i) => (
             <Button
               key={LETTERS_OPTIONS[i]}
               data-option={LETTERS_OPTIONS[i]}
               onClick={handleClick}
-              fail={showAnswers && option !== country.name && optionChoose === LETTERS_OPTIONS[i]}
-              success={showAnswers && option === country.name}
+              fail={
+                showAnswers &&
+                option !== country[question === 'flag' ? 'name' : question] &&
+                optionChoose === LETTERS_OPTIONS[i]
+              }
+              success={showAnswers && option === country[question === 'flag' ? 'name' : question]}
               disabled={showAnswers}
             >
               {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>

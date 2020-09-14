@@ -21,7 +21,7 @@ const shuffleArray = (array = [], shuffleTimes = 1) => {
   return list;
 };
 
-const QUESTIONS = ['capital', 'country', 'flag'];
+const QUESTIONS = ['capital', 'name', 'flag'];
 
 export default function Game() {
   const [countries, setCountries] = useState([]);
@@ -29,6 +29,7 @@ export default function Game() {
   const [options, setOptions] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(true);
+  const [question, setQuestion] = useState('capital');
 
   useEffect(() => {
     const getCountries = async () => {
@@ -40,19 +41,23 @@ export default function Game() {
     getCountries();
   }, []);
 
-  const getcountryRandom = useCallback(() => {
+  const getCountryRandom = useCallback(() => {
     if (nextQuestion) {
-      const indexRandom = Math.floor(Math.random() * (countries.length - 1)) + 1;
+      const indexRandom = Math.floor(Math.random() * countries.length);
       const country = countries[indexRandom];
+      const questionRandom = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+
       setcountryRandom(country);
       setNextQuestion(false);
+      setQuestion(questionRandom);
     }
-  }, [countries, setcountryRandom, nextQuestion]);
+  }, [countries, nextQuestion]);
 
   const getOptions = useCallback(() => {
     const NUM_OPTIONS = 3;
     const indexUsed = [];
-    const optionsAnswers = [countryRandom.name];
+    const questionOption = question === 'flag' ? 'name' : question;
+    const optionsAnswers = [countryRandom[questionOption]];
     let optionsShuffled = [];
 
     for (let i = 0; i < NUM_OPTIONS; i++) {
@@ -63,22 +68,22 @@ export default function Game() {
           indexRandom >= 1 && indexRandom <= countries.length - 1 ? indexRandom + 1 : indexRandom - 1;
 
         indexUsed.push(index);
-        optionsAnswers.push(countries[index].name);
+        optionsAnswers.push(countries[index][questionOption]);
       } else {
-        optionsAnswers.push(countries[indexRandom].name);
+        optionsAnswers.push(countries[indexRandom][questionOption]);
         indexUsed.push(indexRandom);
       }
     }
 
     optionsShuffled = shuffleArray(optionsAnswers, Math.floor(Math.random() * 5) + 1);
     setOptions(optionsShuffled);
-  }, [countryRandom, setOptions, countries]);
+  }, [countryRandom, countries]);
 
   useEffect(() => {
     if (loaded) {
-      getcountryRandom();
+      getCountryRandom();
     }
-  }, [loaded, getcountryRandom]);
+  }, [loaded, getCountryRandom]);
 
   useEffect(() => {
     if (loaded && countryRandom) {
@@ -92,7 +97,12 @@ export default function Game() {
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
           {loaded ? (
-            <CardGame options={options} country={countryRandom} setNextQuestion={setNextQuestion} />
+            <CardGame
+              options={options}
+              country={countryRandom || {}}
+              setNextQuestion={setNextQuestion}
+              question={question}
+            />
           ) : (
             <p>Loading...</p>
           )}
