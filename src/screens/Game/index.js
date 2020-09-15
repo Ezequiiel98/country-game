@@ -37,6 +37,8 @@ export default function Game() {
   const [loaded, setLoaded] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(true);
   const [question, setQuestion] = useState('capital');
+  const [finishGame, setFinishGame] = useState(false);
+  const [test, setTest] = useState(0);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -57,6 +59,11 @@ export default function Game() {
       setcountryRandom(country);
       setNextQuestion(false);
       setQuestion(questionRandom);
+      setTest(test + 1);
+
+      if (test === 4) {
+        setFinishGame(true);
+      }
     }
   }, [countries, nextQuestion]);
 
@@ -105,17 +112,17 @@ export default function Game() {
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
+          {!loaded && !finishGame && <p>Loading...</p>}
           <PointsContextProvider>
-            {loaded ? (
+            {loaded && !finishGame && (
               <CardGame
                 options={options}
                 country={countryRandom || {}}
                 setNextQuestion={setNextQuestion}
                 question={question}
               />
-            ) : (
-              <p>Loading...</p>
             )}
+            {finishGame && <CardFinishGame />}
           </PointsContextProvider>
         </div>
       </div>

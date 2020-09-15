@@ -43,7 +43,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
     setOptionChoose(option);
     setShowAnswers(true);
   };
-  
+
   const handleNext = e => {
     e.preventDefault();
 
