@@ -24,7 +24,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
   const [showAnswers, setShowAnswers] = useState(false);
   const [optionChoose, setOptionChoose] = useState(null);
 
-  const handleClick = (e) => {
+  const handleAnswer = (e) => {
     e.preventDefault();
     const { option } = e.target.dataset;
 
@@ -64,7 +64,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
                 <Button
                   key={LETTERS_OPTIONS[i]}
                   data-option={LETTERS_OPTIONS[i]}
-                  onClick={handleClick}
+                  onClick={handleAnswer}
                   fail={
                     showAnswers &&
                     option !== country[question === 'flag' ? 'name' : question] &&
