@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import CardGame from 'components/CardGame';
 import CardFinishGame from 'components/CardFinishGame';
 import fetchCountries from 'services/fetchCountries.js';
+import PointsContextProvider from 'context/points-context';
 
 import styles from './index.module.scss';
 
@@ -104,16 +105,18 @@ export default function Game() {
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
-          {loaded ? (
-            <CardGame
-              options={options}
-              country={countryRandom || {}}
-              setNextQuestion={setNextQuestion}
-              question={question}
-            />
-          ) : (
-            <p>Loading...</p>
-          )}
+          <PointsContextProvider>
+            {loaded ? (
+              <CardGame
+                options={options}
+                country={countryRandom || {}}
+                setNextQuestion={setNextQuestion}
+                question={question}
+              />
+            ) : (
+              <p>Loading...</p>
+            )}
+          </PointsContextProvider>
         </div>
       </div>
       <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>
