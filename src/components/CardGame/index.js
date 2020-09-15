@@ -36,7 +36,9 @@ export default function CardGame({ options, country, setNextQuestion, question }
     setShowAnswers(true);
   };
 
-  const handleNext = () => {
+  const handleNext = e => {
+    e.preventDefault();
+
     if (showAnswers) {
       setShowAnswers(false);
       setOptionChoose(null);
@@ -52,26 +54,30 @@ export default function CardGame({ options, country, setNextQuestion, question }
         {question === 'flag' && <img className={styles.flagCountry} src={country?.flag} alt="Country Flag" />}
 
         <h2 className={styles.titleQuiz}>
-          {QUESTIONS[question].getQuestion(country)}{' '}
+          {QUESTIONS[question].getQuestion(country)}
         </h2>
 
         <div className={styles.containerOptions}>
-          {options.map((option, i) => (
-            <Button
-              key={LETTERS_OPTIONS[i]}
-              data-option={LETTERS_OPTIONS[i]}
-              onClick={handleClick}
-              fail={
-                showAnswers &&
-                option !== country[question === 'flag' ? 'name' : question] &&
-                optionChoose === LETTERS_OPTIONS[i]
-              }
-              success={showAnswers && option === country[question === 'flag' ? 'name' : question]}
-              disabled={showAnswers}
-            >
-              {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
-            </Button>
-          ))}
+          {options.map((option, i) => {
+            if (option.trim() !== '') {
+              return (
+                <Button
+                  key={LETTERS_OPTIONS[i]}
+                  data-option={LETTERS_OPTIONS[i]}
+                  onClick={handleClick}
+                  fail={
+                    showAnswers &&
+                    option !== country[question === 'flag' ? 'name' : question] &&
+                    optionChoose === LETTERS_OPTIONS[i]
+                  }
+                  success={showAnswers && option === country[question === 'flag' ? 'name' : question]}
+                  disabled={showAnswers}
+                >
+                  {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
+                </Button>
+              );
+            }
+          })}
           <Button secondary onClick={handleNext} disabled={!showAnswers}>
             Next
           </Button>

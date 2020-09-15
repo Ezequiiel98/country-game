@@ -8,9 +8,15 @@ import styles from './index.module.scss';
 const shuffleArray = (array = [], shuffleTimes = 1) => {
   const list = [...array];
 
+  if (Math.random() > 0.5) {
+    list.sort();
+  } else {
+    list.reverse();
+  }
+
   for (let i = 0; i < shuffleTimes; i++) {
     for (let j = 0; j < list.length; j++) {
-      const indexRandom = Math.floor(Math.random() * (list.length - 1)) + 1;
+      const indexRandom = Math.floor(Math.random() * list.length);
       const itemTemp = list[j];
 
       list[j] = list[indexRandom];
@@ -61,7 +67,7 @@ export default function Game() {
     let optionsShuffled = [];
 
     for (let i = 0; i < NUM_OPTIONS; i++) {
-      const indexRandom = Math.floor(Math.random() * (countries.length - 1)) + 1;
+      const indexRandom = Math.floor(Math.random() * countries.length);
 
       if (countries[indexRandom] === countryRandom || indexUsed.includes(indexRandom)) {
         const index =
@@ -69,9 +75,11 @@ export default function Game() {
 
         indexUsed.push(index);
         optionsAnswers.push(countries[index][questionOption]);
+        console.log('pri', optionsAnswers, index);
       } else {
         optionsAnswers.push(countries[indexRandom][questionOption]);
         indexUsed.push(indexRandom);
+        console.log('seg', optionsAnswers, indexRandom);
       }
     }
 
