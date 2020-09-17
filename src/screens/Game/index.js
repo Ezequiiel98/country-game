@@ -30,7 +30,7 @@ const shuffleArray = (array = [], shuffleTimes = 1) => {
 };
 
 const QUESTIONS = ['capital', 'name', 'flag'];
-const TIME_GAME = 45;
+const TIME_GAME = 30;
 
 export default function Game() {
   const [countries, setCountries] = useState([]);

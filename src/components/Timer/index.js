@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 export default function Timer({ percentage }) {
   return (
     <div className={styles.containerTimer}>
-      <div className={percentage > 30 ? styles.barGreen : styles.barRed} style={{ width: `${percentage}%` }} />
+      <div className={percentage > 20 ? styles.barGreen : styles.barRed} style={{ width: `${percentage}%` }} />
     </div>
   );
 }
