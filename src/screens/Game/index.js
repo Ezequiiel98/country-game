@@ -40,6 +40,7 @@ export default function Game() {
   const [finishGame, setFinishGame] = useState(false);
   const [test, setTest] = useState(0);
   const [tryAgain, setTryAgain] = useState(false);
+  const [timer, setTimer] = useState(45);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -51,6 +52,19 @@ export default function Game() {
     getCountries();
   }, []);
 
+  useEffect(() => {
+    const intervalTimer = setInterval(() => {
+      setTimer(timer - 1);
+    }, 1000);
+
+    if (timer === 0) {
+      setFinishGame(true);
+    }
+
+    return () => clearInterval(intervalTimer);
+  }, [setTimer, timer]);
+
+  console.log(timer);
   const getCountryRandom = useCallback(() => {
     if (nextQuestion || tryAgain) {
       const indexRandom = Math.floor(Math.random() * countries.length);
@@ -62,19 +76,15 @@ export default function Game() {
       setQuestion(questionRandom);
       setTest(test + 1);
 
-      if (test === 4) {
-        setFinishGame(true);
-      }
-
       if (tryAgain) {
         setTest(0);
         setFinishGame(false);
+        setTimer(45);
       }
 
       setTryAgain(false);
     }
   }, [countries, tryAgain, nextQuestion]);
-        console.log(tryAgain, test);
 
   const getOptions = useCallback(() => {
     const NUM_OPTIONS = 3;
