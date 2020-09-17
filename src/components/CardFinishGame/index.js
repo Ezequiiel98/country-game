@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import imgAward from 'assets/undraw_winners_ao2o 2.svg';
 import { PointsContext } from 'context/points-context';
 
@@ -9,9 +10,12 @@ import styles from './index.module.scss';
 export default function CardFinishGame({ setTryAgain }) {
   const [points, setPoints] = useContext(PointsContext);
 
-  const handleClick = e => {
-    setPoints(0);
+  const handleClick = () => {
     setTryAgain(true);
+
+    setTimeout(() => {
+      setPoints(0);
+    }, 50);
   };
 
   return (
@@ -25,3 +29,8 @@ export default function CardFinishGame({ setTryAgain }) {
     </div>
   );
 }
+
+CardFinishGame.propTypes = {
+  setTryAgain: PropTypes.func.isRequired
+};
+
