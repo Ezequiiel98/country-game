@@ -39,6 +39,7 @@ export default function Game() {
   const [question, setQuestion] = useState('capital');
   const [finishGame, setFinishGame] = useState(false);
   const [test, setTest] = useState(0);
+  const [tryAgain, setTryAgain] = useState(false);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -51,7 +52,7 @@ export default function Game() {
   }, []);
 
   const getCountryRandom = useCallback(() => {
-    if (nextQuestion) {
+    if (nextQuestion || tryAgain) {
       const indexRandom = Math.floor(Math.random() * countries.length);
       const country = countries[indexRandom];
       const questionRandom = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
@@ -64,8 +65,16 @@ export default function Game() {
       if (test === 4) {
         setFinishGame(true);
       }
+
+      if (tryAgain) {
+        setTest(0);
+        setFinishGame(false);
+      }
+
+      setTryAgain(false);
     }
-  }, [countries, nextQuestion]);
+  }, [countries, tryAgain, nextQuestion]);
+        console.log(tryAgain, test);
 
   const getOptions = useCallback(() => {
     const NUM_OPTIONS = 3;
@@ -83,17 +92,15 @@ export default function Game() {
 
         indexUsed.push(index);
         optionsAnswers.push(countries[index][questionOption]);
-        console.log('pri', optionsAnswers, index);
       } else {
         optionsAnswers.push(countries[indexRandom][questionOption]);
         indexUsed.push(indexRandom);
-        console.log('seg', optionsAnswers, indexRandom);
       }
     }
 
     optionsShuffled = shuffleArray(optionsAnswers, Math.floor(Math.random() * 5) + 1);
     setOptions(optionsShuffled);
-  }, [countryRandom, countries]);
+  }, [question, countryRandom, countries]);
 
   useEffect(() => {
     if (loaded) {
@@ -122,7 +129,7 @@ export default function Game() {
                 question={question}
               />
             )}
-            {finishGame && <CardFinishGame />}
+            {finishGame && <CardFinishGame setTryAgain={setTryAgain} />}
           </PointsContextProvider>
         </div>
       </div>

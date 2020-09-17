@@ -86,7 +86,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
               );
             }
           })}
-          <Button secondary onClick={handleNext} disabled={!showAnswers}>
+          <Button  onClick={handleNext} disabled={!showAnswers} secondary>
             Next
           </Button>
         </div>
