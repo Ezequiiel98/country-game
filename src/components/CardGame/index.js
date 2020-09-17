@@ -58,7 +58,6 @@ export default function CardGame({ options, country, setNextQuestion, question }
     <>
       <img className={styles.imgWorld} src={imageWorld} alt="picture man with the world" />
       <div className={styles.card}>
-
         {question === 'flag' && <img className={styles.flagCountry} src={country?.flag} alt="Country Flag" />}
 
         <h2 className={styles.titleQuiz}>
@@ -86,7 +85,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
               );
             }
           })}
-          <Button  onClick={handleNext} disabled={!showAnswers} secondary>
+          <Button onClick={handleNext} disabled={!showAnswers} secondary>
             Next
           </Button>
         </div>
