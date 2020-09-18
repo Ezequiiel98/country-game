@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import CardGame from 'components/CardGame';
 import CardFinishGame from 'components/CardFinishGame';
+import PlayStart from 'components/PlayStart';
 import Timer from 'components/Timer';
+import Loader from 'components/Loader';
 import fetchCountries from 'services/fetchCountries.js';
 import PointsContextProvider from 'context/points-context';
 
@@ -37,10 +39,11 @@ export default function Game() {
   const [countryRandom, setcountryRandom] = useState(null);
   const [options, setOptions] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [nextQuestion, setNextQuestion] = useState(true);
+  const [nextQuestion, setNextQuestion] = useState(false);
   const [question, setQuestion] = useState('capital');
   const [finishGame, setFinishGame] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
+  const [startGame, setStartGame] = useState(false);
   const [timer, setTimer] = useState(TIME_GAME);
   const percentage = timer / TIME_GAME * 100;
 
@@ -56,7 +59,9 @@ export default function Game() {
 
   useEffect(() => {
     const intervalTimer = setInterval(() => {
-      setTimer(timer - 1);
+      if (startGame) {
+        setTimer(timer - 1);
+      }
     }, 1000);
 
     if (timer === 0) {
@@ -64,7 +69,7 @@ export default function Game() {
     }
 
     return () => clearInterval(intervalTimer);
-  }, [setTimer, timer]);
+  }, [setTimer, timer, startGame]);
 
   const getCountryRandom = useCallback(() => {
     if (nextQuestion || tryAgain) {
@@ -122,15 +127,21 @@ export default function Game() {
     }
   }, [loaded, countryRandom, getOptions]);
 
+  const handlePlayGame = () => {
+    setStartGame(true);
+    setNextQuestion(true);
+  };
 
   return (
     <div className={styles.game}>
       <div className={styles.container}>
         <h1 className={styles.title}>Country Quiz</h1>
         <div className={styles.containerCard}>
-          {!loaded && !finishGame && <p>Loading...</p>}
+          {!loaded && !finishGame && <Loader />}
+          {!startGame && loaded && <PlayStart onClick={handlePlayGame} />}
+
           <PointsContextProvider>
-            {loaded && !finishGame && (
+            {startGame && loaded && !finishGame && (
               <>
                 <Timer percentage={percentage} />
                 <CardGame
@@ -142,11 +153,14 @@ export default function Game() {
                 />
               </>
             )}
+
             {finishGame && <CardFinishGame setTryAgain={setTryAgain} />}
           </PointsContextProvider>
         </div>
       </div>
-      <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>
+      <footer className={styles.footer}>
+        <p className={styles.nameCopyRight}>Ezequiel Aragón @ DevChallenges.io</p>
+      </footer>
     </div>
   );
 }

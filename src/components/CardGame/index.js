@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import imageWorld from 'assets/undraw_adventure_4hum 1.svg';
 import { PointsContext } from 'context/points-context';
 
@@ -56,7 +57,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
 
   return (
     <>
-      <img className={styles.imgWorld} src={imageWorld} alt="picture man with the world" />
+      <img className={styles.imgWorld} src={imageWorld} alt="Man with the world" />
       <div className={styles.card}>
         {question === 'flag' && <img className={styles.flagCountry} src={country?.flag} alt="Country Flag" />}
 
@@ -93,3 +94,10 @@ export default function CardGame({ options, country, setNextQuestion, question }
     </>
   );
 }
+
+CardGame.propTypes = {
+  country: PropTypes.instanceOf(Object).isRequired,
+  question: PropTypes.string.isRequired,
+  options: PropTypes.instanceOf(Array).isRequired,
+  setNextQuestion: PropTypes.func.isRequired
+};
