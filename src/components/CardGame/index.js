@@ -66,10 +66,10 @@ export default function CardGame({ options, country, setNextQuestion, question }
         </h2>
 
         <div className={styles.containerOptions}>
-          {options.map((option, i) => {
-            if (option.trim() !== '') {
-              return (
-                <Button
+          {options
+            .filter(option => option.trim() !== '')
+            .map((option, i) => (
+              <Button
                   key={LETTERS_OPTIONS[i]}
                   data-option={LETTERS_OPTIONS[i]}
                   onClick={handleAnswer}
@@ -80,12 +80,11 @@ export default function CardGame({ options, country, setNextQuestion, question }
                   }
                   success={showAnswers && option === country[question === 'flag' ? 'name' : question]}
                   disabled={showAnswers}
-                >
-                  {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
-                </Button>
-              );
-            }
-          })}
+              >
+                {LETTERS_OPTIONS[i]} <span className={styles.optionText}>{option}</span>
+              </Button>
+            ))
+          }
           <Button onClick={handleNext} disabled={!showAnswers} secondary>
             Next
           </Button>
