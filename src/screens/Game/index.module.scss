@@ -1,0 +1,44 @@
+.game {
+  background-image: url("../../assets/background.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: red;
+  padding: 35px 10px 15px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.title{
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 33px;
+}
+
+.container{
+  color: white;
+  position: relative;
+  max-width: 430px;
+}
+
+.containerCard {
+  border-radius: 24px; 
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px 20px 32px;
+  color: #2F527B;
+}
+
+.nameCopyRight {
+  color: #fff;
+  margin-top: 15px; 
+  font-size: 15px;
+}
+

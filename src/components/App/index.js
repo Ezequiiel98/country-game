@@ -1,8 +1,10 @@
 import React from 'react';
-import styles from './index.module.scss' 
+import Game from 'screens/Game/';
+
+import styles from './index.module.scss';
 
 function App() {
-  return <h1> Proyecto country-quiz </h1>;
+  return <Game />;
 }
 
 export default App;
