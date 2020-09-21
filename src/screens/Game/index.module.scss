@@ -37,7 +37,7 @@
   padding: 0 32px;
   color: #2F527B;
   min-height: 60vh;
-  min-width: 250px;
+  max-width: 300px;
 }
 
 @media screen and (min-width: 480px) {
@@ -50,6 +50,7 @@
 .footer{
   margin: auto auto 0 auto;
 }
+
 .nameCopyRight {
   color: #fff;
   font-size: 15px;

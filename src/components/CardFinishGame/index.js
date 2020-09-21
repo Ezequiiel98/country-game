@@ -20,7 +20,7 @@ export default function CardFinishGame({ setTryAgain }) {
 
   return (
     <div className={styles.card}>
-      <img src={imgAward} alt="An award and two people" />
+      <img src={imgAward} className={styles.img} alt="An award and two people" />
       <h2 className={styles.title}>Results</h2>
       <p className={styles.message}>
         You got <span className={styles.points}>{points}</span> correct answers.

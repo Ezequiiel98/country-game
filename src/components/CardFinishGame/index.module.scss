@@ -1,13 +1,19 @@
 .card {
   text-align: center;
-  padding: 20px 30px;
+  padding: 20px 30px 20px 0;
   color: #1D355D;
- 
+  margin: 0 auto; 
   &>:last-child {
     text-align: center;
     min-width: 75%;
     font-weight: 600;
     padding: 15px 10px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .card {
+    padding-left: 30px;
   }
 }
 
@@ -30,4 +36,9 @@
   font-size: 40px;
   font-weight: bold;
   padding: 5px;
+}
+
+.img {
+  display: block;
+  margin: 0 auto;
 }
