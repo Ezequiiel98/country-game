@@ -7,32 +7,10 @@ import Loader from 'components/Loader';
 import fetchCountries from 'services/fetchCountries.js';
 import PointsContextProvider from 'context/points-context';
 
+import shuffleArray from './helpers/shuffleArray.js';
+import { QUESTIONS, TIME_GAME } from './contants';
 import styles from './index.module.scss';
 
-const shuffleArray = (array = [], shuffleTimes = 1) => {
-  const list = [...array];
-
-  if (Math.random() > 0.5) {
-    list.sort();
-  } else {
-    list.reverse();
-  }
-
-  for (let i = 0; i < shuffleTimes; i++) {
-    for (let j = 0; j < list.length; j++) {
-      const indexRandom = Math.floor(Math.random() * list.length);
-      const itemTemp = list[j];
-
-      list[j] = list[indexRandom];
-      list[indexRandom] = itemTemp;
-    }
-  }
-
-  return list;
-};
-
-const QUESTIONS = ['capital', 'name', 'flag'];
-const TIME_GAME = 20;
 
 export default function Game() {
   const [countries, setCountries] = useState([]);

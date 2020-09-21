@@ -5,22 +5,8 @@ import { PointsContext } from 'context/points-context';
 
 import Button from '../Button';
 
+import { LETTERS_OPTIONS, QUESTIONS } from './contants';
 import styles from './index.module.scss';
-
-const LETTERS_OPTIONS = ['A', 'B', 'C', 'D'];
-const QUESTIONS = {
-  flag: {
-    getQuestion: () => 'Which country does this flag belong to?'
-  },
-
-  name: {
-    getQuestion: ({ capital }) => `${capital} is the capital of`
-  },
-
-  capital: {
-    getQuestion: ({ name }) => `The capital of ${name}`
-  }
-};
 
 export default function CardGame({ options, country, setNextQuestion, question, setStopTimer }) {
   const [showAnswers, setShowAnswers] = useState(false);
