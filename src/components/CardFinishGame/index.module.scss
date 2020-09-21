@@ -1,6 +1,6 @@
 .card {
   text-align: center;
-  padding: 20px 30px 0 30px;
+  padding: 20px 30px;
   color: #1D355D;
  
   &>:last-child {
@@ -12,14 +12,14 @@
 }
 
 .title {
-  font-size: 48px;
+  font-size: 45px;
   padding: 0;
   margin: 30px 0 5px 0;
   font-weight: bold;
 }
 
 .message {
-  margin: 10px 21px 30px 21px;
+  margin-bottom: 40px;
   padding: 0;
   font-size: 17px;
   text-align: center;
