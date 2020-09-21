@@ -32,7 +32,7 @@ const shuffleArray = (array = [], shuffleTimes = 1) => {
 };
 
 const QUESTIONS = ['capital', 'name', 'flag'];
-const TIME_GAME = 30;
+const TIME_GAME = 20;
 
 export default function Game() {
   const [countries, setCountries] = useState([]);
@@ -44,6 +44,7 @@ export default function Game() {
   const [finishGame, setFinishGame] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
   const [startGame, setStartGame] = useState(false);
+  const [stopTimer, setStopTimer] = useState(true);
   const [timer, setTimer] = useState(TIME_GAME);
   const percentage = timer / TIME_GAME * 100;
 
@@ -59,7 +60,7 @@ export default function Game() {
 
   useEffect(() => {
     const intervalTimer = setInterval(() => {
-      if (startGame) {
+      if (!stopTimer && timer !== 0) {
         setTimer(timer - 1);
       }
     }, 1000);
@@ -69,7 +70,7 @@ export default function Game() {
     }
 
     return () => clearInterval(intervalTimer);
-  }, [setTimer, timer, startGame]);
+  }, [setTimer, timer, stopTimer]);
 
   const getCountryRandom = useCallback(() => {
     if (nextQuestion || tryAgain) {
@@ -130,6 +131,7 @@ export default function Game() {
   const handlePlayGame = () => {
     setStartGame(true);
     setNextQuestion(true);
+    setStopTimer(false);
   };
 
   return (
@@ -150,6 +152,7 @@ export default function Game() {
                   setNextQuestion={setNextQuestion}
                   question={question}
                   percentage={percentage}
+                  setStopTimer={setStopTimer}
                 />
               </>
             )}
@@ -164,3 +167,4 @@ export default function Game() {
     </div>
   );
 }
+

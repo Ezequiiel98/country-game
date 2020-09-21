@@ -22,7 +22,7 @@ const QUESTIONS = {
   }
 };
 
-export default function CardGame({ options, country, setNextQuestion, question }) {
+export default function CardGame({ options, country, setNextQuestion, question, setStopTimer }) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [optionChoose, setOptionChoose] = useState(null);
   const [points, setPoints] = useContext(PointsContext);
@@ -42,6 +42,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
     }
 
     setOptionChoose(option);
+    setStopTimer(true);
     setShowAnswers(true);
   };
 
@@ -51,6 +52,7 @@ export default function CardGame({ options, country, setNextQuestion, question }
     if (showAnswers) {
       setShowAnswers(false);
       setOptionChoose(null);
+      setStopTimer(false);
       setNextQuestion(true);
     }
   };
@@ -98,5 +100,7 @@ CardGame.propTypes = {
   country: PropTypes.instanceOf(Object).isRequired,
   question: PropTypes.string.isRequired,
   options: PropTypes.instanceOf(Array).isRequired,
-  setNextQuestion: PropTypes.func.isRequired
+  setNextQuestion: PropTypes.func.isRequired,
+  setStopTimer: PropTypes.func.isRequired
 };
+
