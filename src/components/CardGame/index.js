@@ -13,10 +13,8 @@ export default function CardGame({ options, country, setNextQuestion, question, 
   const [optionChoose, setOptionChoose] = useState(null);
   const [points, setPoints] = useContext(PointsContext);
 
-  const handleAnswer = (e) => {
-    e.preventDefault();
-    const { option } = e.target.dataset;
-    const answer = options[LETTERS_OPTIONS.indexOf(option)];
+  const handleAnswer = optionAnswer => {
+    const answer = options[LETTERS_OPTIONS.indexOf(optionAnswer)];
     const isCorrect = answer === country[question === 'flag' ? 'name' : question];
 
     if (showAnswers) {
@@ -27,7 +25,7 @@ export default function CardGame({ options, country, setNextQuestion, question, 
       setPoints(points + 1);
     }
 
-    setOptionChoose(option);
+    setOptionChoose(optionAnswer);
     setStopTimer(true);
     setShowAnswers(true);
   };
@@ -59,8 +57,7 @@ export default function CardGame({ options, country, setNextQuestion, question, 
             .map((option, i) => (
               <Button
                   key={LETTERS_OPTIONS[i]}
-                  data-option={LETTERS_OPTIONS[i]}
-                  onClick={handleAnswer}
+                  onClick={() => handleAnswer(LETTERS_OPTIONS[i])}
                   fail={
                     showAnswers &&
                     option !== country[question === 'flag' ? 'name' : question] &&
